@@ -12,6 +12,7 @@ projects[services][version] = "3.1"
 
 projects[rules][version] = "2.0"
 projects[ctools][version] = "1.0-rc1"
+projects[jquery_update][version] = "2.2"
 
 ; Themes
 projects[adaptivetheme][version] = "2.1"
