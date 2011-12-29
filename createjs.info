@@ -1,0 +1,4 @@
+name = createjs
+description = Integrates the create.js library into drupal which allows RDFa based content editing
+core = 7.x
+package = User Interface

@@ -1,0 +1,95 @@
+<?php
+/**
+* @file
+* A module to integrate the create.js library with drupal to allow RDFa based content editing
+*/
+
+define('CREATEJS_PATH', 'sites/all/libraries/create');
+/**
+* Implements hook_menu().
+*/
+function createjs_menu() {
+  $items = array(); 
+
+  $items['admin/config/createjs'] = array(
+    'title' => 'Create,js Settings',
+    'description' => 'Configuration for create.js module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('current_posts_form'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+ 
+  return $items;
+}
+
+/**
+* Form function, called by drupal_get_form()
+* in current_posts_menu().
+*/
+function createjs_form($form, &$form_state) {
+  $form['addcreatetoolbar'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Add the create toolbar to drupal'),
+    '#default_value' => variable_get('addcreatetoolbar', 0),
+    '#description' => t('Select if the midgard toolbar should be displayed (may conflict with core toolbar).'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+function createjs_css_alter(&$css) {
+$path = CREATEJS_PATH;
+drupal_add_css($path . '/themes/midgard-toolbar/midgardbar.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
+}
+
+function createjs_js_alter(&$javascript) {
+    $path = CREATEJS_PATH;
+    if (!file_exists($path . '/src/jquery.Midgard.midgardCreate.js')) {
+      // Display a message when aloha is not found
+      drupal_set_message(t('You need to download the CreateJS Framework and extract the entire contents of the archive into the %path folder of your server.', array('%path' => $path)), 'warning', FALSE);
+      return FALSE;
+    }
+    global $base_url;
+    $js_settings = array('preprocess' => false);
+    drupal_add_library('system', 'effects.highlight');
+    drupal_add_library('system', 'ui.button');
+    drupal_add_js($path . '/deps/modernizr.custom.80485.js', $js_settings);
+    drupal_add_js($path . '/deps/underscore-min.js', $js_settings);
+    drupal_add_js($path . '/deps/backbone-min.js', $js_settings);
+    drupal_add_js($path . '/deps/vie-min.js', $js_settings);
+    drupal_add_js($path . '/deps/hallo.js', $js_settings);
+    drupal_add_js($path . '/deps/hallo/format.js', $js_settings);
+    
+    drupal_add_js($path . '/src/jquery.Midgard.midgardCreate.js', $js_settings);
+    drupal_add_js($path . '/src/jquery.Midgard.midgardToolbar.js', $js_settings);
+    drupal_add_js($path . '/src/jquery.Midgard.midgardStorage.js', $js_settings);
+    drupal_add_js($path . '/src/jquery.Midgard.midgardEditable.js', $js_settings);
+    
+    $settings = "jQuery(document).ready(function() { jQuery('body').midgardCreate( { url: '/createjs/node' } ); });";
+    
+    drupal_add_js($settings, array('type' => 'inline'));
+    
+    return TRUE;
+}
+
+/**
+* Implements hook_help.
+*
+* Displays help and module information.
+*
+* @param path
+*   Which path of the site we're using to display help
+* @param arg
+*   Array that holds the current path as returned from arg() function
+*/
+function createjs_help($path, $arg) {
+  switch ($path) {
+    case "admin/help#createjs":
+      return '<p>'.  t("Adds RDFa based content editing") .'</p>';
+      break;
+  }
+}
+
+?>
