@@ -42,5 +42,5 @@ libraries[create][type] = "library"
 
 libraries[spyc][download][type] = "get"
 libraries[spyc][download][url] = "http://spyc.googlecode.com/files/spyc-0.5.zip
-libraries[jquery_ui][directory_name] = "lib"
-libraries[jquery_ui][destination] = "modules/services/servers/rest_server"
+libraries[spyc][directory_name] = "spyc"
+libraries[spyc][destination] = "modules/services/servers/rest_server/lib"
