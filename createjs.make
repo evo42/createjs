@@ -27,7 +27,7 @@ projects[tao][version] = "3.0-beta4"
 ; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
 ; and url is the url of the download.
 projects[createjs][download][type] = "git"
-projects[createjs][download][url] = "git@redmine.wi1projects.com:custommodules/createjs.git"
+projects[createjs][download][url] = "git://github.com/dominikb1888/createjs.git"
 projects[createjs][type] = "module"
 
 ; Libraries
