@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Create JS feature.
+ */
+
+include_once('create_js.features.inc');

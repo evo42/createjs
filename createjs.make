@@ -40,3 +40,7 @@ libraries[create][download][url] = "git://github.com/bergie/create.git"
 libraries[create][directory_name] = "create"
 libraries[create][type] = "library"
 
+libraries[spyc][download][type] = "get"
+libraries[spyc][download][url] = "http://spyc.googlecode.com/files/spyc-0.5.zip
+libraries[jquery_ui][directory_name] = "lib"
+libraries[jquery_ui][destination] = "modules/services/servers/rest_server"
