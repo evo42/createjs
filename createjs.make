@@ -37,7 +37,7 @@ projects[createjs][type] = "module"
 ; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
 ; and url is the url of the download.
 libraries[create][download][type] = "git"
-libraries[create][download][url] = "git://github.com/bergie/create.git"
+libraries[create][download][url] = "git://github.com/dominikb1888/create.git"
 libraries[create][directory_name] = "create"
 libraries[create][type] = "library"
 
